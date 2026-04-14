@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Quiz</title>
+  </head>
+
+  <body>
+    <h2>Quiz</h2>
+    <p id="par1"></p>
+
+    <form>
+      <input type="text" id="result" placeholder="Enter result" autofocus>
+    </form>
+
+    <button id="btn1">Enter</button>
+    <div id="div1"></div>
+
+    <script>
+      function quiz() {
+        // Random integers between 1 and 50 (both included):
+        const a = Math.floor(Math.random() * 50) + 1;
+        const b = Math.floor(Math.random() * 50) + 1;
+        result = a + b;
+
+        document.getElementById("par1").innerHTML =
+          "<strong>" + a + " + " + b + " = " + "?</strong>";
+      }
+
+      function check() {
+        if (result === +document.getElementById("result").value) {
+          document.getElementById("div1").innerHTML =
+            "<p style=\"color:blue;\"><strong>That's right!</strong></p>";
+        }
+        else {
+          document.getElementById("div1").innerHTML =
+            "<p style=\"color:red;\"><strong>Wrong. It was " + result + ".</strong></p>";
+        }
+        document.getElementById("result").value = "";
+        quiz();
+      }
+
+      let input = document.getElementById("result");
+      
+      input.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          document.getElementById("btn1").click();
+        }
+      });
+
+      window.addEventListener("load", quiz);
+      document.getElementById("btn1").addEventListener("click", check);
+    </script>
+  </body>
+</html>
